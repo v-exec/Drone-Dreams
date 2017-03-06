@@ -1,0 +1,7 @@
+{
+	"name": "dronedreams",
+	"dependencies": {
+		"express": "4.10.2",
+		"socket.io": "1.2.0"
+	}
+}
