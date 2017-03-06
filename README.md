@@ -9,6 +9,5 @@ Each user's mouse coordinates (or touch coordinates, for mobile) on the canvas a
 ## Dependancies
 
 _Drone Dreams_' site runs on NodeJS, and has the following dependencies:
-  - jQuery
   - ExpressJS
   - socket.io
