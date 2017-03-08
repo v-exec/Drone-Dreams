@@ -56,13 +56,14 @@ function drawCross(x, y) {
 }
 
 //emits coordinates using socket
-function emitCoordinates(nX, nY) {
-	socket.emit("data", {x: nX, y: nY});
+function emitCoordinates(x, y) {
+	socket.emit("data", "x " + x);
+	socket.emit("data", "y " + y);
 }
 
 //normalizes coordinates to 0-100 range
 function normalizeCoord(x, maxX) {
-	return x / maxX * 100;
+	return Math.round(x / maxX * 127);
 }
 
 //----------runtime----------//
@@ -79,32 +80,24 @@ function draw() {
 	//fit canvas to container
 	fitToContainer();
 
-	//get normalized X Y mouse / touch positions (with timeout to control data quantity??)
+	//clear canvas for next frame
+	UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
 
-	//get mouse position on mouse move (for desktop)
+	//get normalized X Y mouse / touch positions
+	//mouse position on mouse move (desktop)
 	document.onmousemove = function (event) {
 		UI.cursorX = event.pageX;
 		UI.cursorY = event.pageY;
 	}
-
-	//get touch position on touch start and touch move (for mobile)
+	//touch position on touch start and touch move (mobile)
   	document.addEventListener('touchstart', function(e) {
         UI.cursorX = e.targetTouches[0].pageX;
 		UI.cursorY = e.targetTouches[0].pageY;
     }, false);
-
-
 	document.addEventListener('touchmove', function(e) {
         UI.cursorX = e.targetTouches[0].pageX;
 	    UI.cursorY = e.targetTouches[0].pageY;
     }, false);
-
-    var x = normalizeCoord(UI.cursorX, UI.canvas.width);
-	var y = normalizeCoord(UI.cursorY, UI.canvas.height);
-	emitCoordinates(x, y);
-
-	//clear canvas for next frame
-	UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
 
 	//draw cross at mouse position;
 	drawCross(UI.cursorX, UI.cursorY);
@@ -112,6 +105,11 @@ function draw() {
 	//loop animation
 	window.requestAnimationFrame(draw);
 }
+
+//output coordinates intermittently through socket event
+setInterval(function(){
+	emitCoordinates(normalizeCoord(UI.cursorX, UI.canvas.width), normalizeCoord(UI.cursorY, UI.canvas.height));
+}, 100);
 
 //on page load, call setup to start animation
 window.addEventListener("DOMContentLoaded", function () {
