@@ -6,6 +6,8 @@ This repository holds the web server that acts as an interface for users, as wel
 
 Each user's mouse coordinates (or touch coordinates, for mobile) on the canvas are sent, along with a unique user ID to maintain persistent control over the same parameters, to PureData, which then handles the allocation of parameters and communication with the DAW.
 
+Node communicates with Pd through a direct TCP connection, requiring an open port for the process in the network the machine running Pd is connected to.
+
 ## Dependancies
 
 _Drone Dreams_' site runs on NodeJS, and has the following dependencies:
