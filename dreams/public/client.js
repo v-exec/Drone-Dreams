@@ -20,7 +20,7 @@ UI.lB = 255;
 UI.lA = 1;
 
 //line width
-UI.lineWidth = 4.0;
+UI.lineWidth = 2.0;
 
 //canvas context setup
 UI.ctx = UI.canvas.getContext('2d');
@@ -51,6 +51,7 @@ function drawCross(x, y) {
 	UI.ctx.moveTo(0, y);
 	UI.ctx.lineTo(UI.canvas.width, y);
 
+	UI.ctx.lineWidth = UI.lineWidth;
 	UI.ctx.strokeStyle = "rgba(" + UI.lR + ", " + UI.lG + ", " + UI.lB + ", " + UI.lA + ")";
 	UI.ctx.stroke();
 }
@@ -83,7 +84,7 @@ function draw() {
 	//clear canvas for next frame
 	UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
 
-	//get normalized X Y mouse / touch positions
+	//get X Y mouse / touch positions
 	//mouse position on mouse move (desktop)
 	document.onmousemove = function (event) {
 		UI.cursorX = event.pageX;
