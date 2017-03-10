@@ -12,6 +12,7 @@ app.use(express.static('public'));
 var port = process.env.PORT || 3000;
 var IP = process.env.IP || '0.0.0.0';
 var pdPort = 25565;
+var pdIP = '666';
 
 //set Express port
 app.set('port', port);
