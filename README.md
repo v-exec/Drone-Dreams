@@ -2,11 +2,9 @@
 
 _Drone Dreams_ is a collaborative music creation tool that gives audience members control over select parameters in a DAW during a live performance.
 
-This repository holds the web server that acts as an interface for users, as well as the PureData patch that manages the connectivity between the DAW's parameters and each user's pointer coordinates.
+This repository holds the web server that acts as an interface for users, as well as the PureData patch that manages the connectivity between the DAW's parameters and each user's pointer coordinates. Node communicates with Pd through a direct TCP connection, requiring an open port for the process in the network the machine running Pd is connected to.
 
-Each user's mouse coordinates (or touch coordinates, for mobile) on the canvas are sent, along with a unique user ID to maintain persistent control over the same parameters, to PureData, which then handles the allocation of parameters and communication with the DAW.
-
-Node communicates with Pd through a direct TCP connection, requiring an open port for the process in the network the machine running Pd is connected to.
+[More information found here.](http://v-os.ca/dronedreams)
 
 ## Dependancies
 
