@@ -34,7 +34,7 @@ for (var i = 0; i < UI.points.length; i++) {
 	UI.points[i] = new Array(2);
 }
 
-//----------functons----------//
+//----------functions----------//
 
 //fits canvas to container
 function fitToContainer() {
